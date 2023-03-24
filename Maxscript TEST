@@ -1,0 +1,46 @@
+fn attachSelection =     --ModifierをcollapseでまとめてPolyにしてアタッチ
+(
+--clearListener()
+undo off --省メモリ
+local selList = getCurrentSelection()
+local LCi = 0
+clearSelection()
+clearUndoBuffer()
+	
+	for LCi =1 to selList.count do
+	(
+		maxOps.CollapseNode selList[LCi]  off
+		--convertTo selList[LCi]  PolyMeshObject
+		
+		if LCi > 1 do (polyop.attach selList[1]  selList[LCi] )
+	)
+	max create mode
+)
+
+
+
+
+fn distillationMesh = --選択から Poly Mesh だけのリストを得る
+(
+clearListener()
+
+local selList = getCurrentSelection()
+local LCi = 0
+local polyList = #()
+local polyNum = 1
+clearSelection()
+	for LCi =1 to selList.count do
+	(
+		targetOBJ = selList[LCi]
+		if (convertTo targetOBJ PolyMeshObject) != undefined do
+		(
+			polyList[polyNum] = targetOBJ.name
+			polyNum += 1
+		)
+	)
+polyList.count
+return polyList
+)
+
+distillationMesh() 
+ｒ
